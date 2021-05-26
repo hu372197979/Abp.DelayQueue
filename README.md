@@ -64,3 +64,16 @@ public class ActivityExpiredHandler : IEventHandler<DelayJobEventMessage>, ITran
     }
 }
 ```
+### 4、发出一个延迟任务
+
+```csharp
+public async Task DealyJob()
+{
+    await iocManager.Resolve<IDelayer>().PutDealyJob(string.Empty, new DelayQueue.ActivityExpired()
+    {
+        Body = "1111",
+        Delay = TimeSpan.FromSeconds(1),
+        TTR = TimeSpan.FromSeconds(5)
+    });
+}
+```
